@@ -1,0 +1,70 @@
+﻿@model EmployeeViewModel
+
+@*add namespace in web.config to see Employee*@
+@{
+    ViewBag.Title = "Employees";
+}
+
+<h2>Employees</h2>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+{
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <span class="glyphicon glyphicon-plus">  Employee</span>
+</button>
+@*glyphicon like fontawesome in bootstrap*@
+}
+@if (Model.Employees == null || Model.Employees.Count == 0)
+{
+    <h3> No Employees</h3>
+}
+else
+{
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Address</th>
+
+        </tr>
+    </thead>
+    <tbody id="tbody">
+      @foreach (Employee emp in Model.Employees)
+      {
+         <tr id="@emp.Id">
+
+             <td>@emp.Name</td>
+             <td>@emp.Age</td>
+             <td>@emp.Gender</td>
+             <td>@emp.Email</td>
+             <td>@emp.Department.Name</td>
+             <td>@emp.Address</td>
+             <td>
+                 @Html.Partial("_PartialControlersBtns", emp.Id)
+             </td>
+
+         </tr>
+      }
+    </tbody>
+</table>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/confirmDelete")
+    <script>
+        function addSuccess() {
+            $('#myModal').modal('hide');
+            document.getElementById("form0").reset();
+        }
+    </script>
+}
+
+
+@Html.Partial("_PartialAddEmpModal",Model)
+
+
+

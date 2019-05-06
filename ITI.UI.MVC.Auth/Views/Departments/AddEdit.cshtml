@@ -1,0 +1,25 @@
+﻿@model Department
+@{
+    ViewBag.Title = ViewBag.Action;
+}
+
+<h2>@ViewBag.Action Department</h2>
+
+@using (Html.BeginForm(ViewBag.Action as string, "Departments", FormMethod.Post))
+{
+
+    if (ViewBag.Action == "Edit")
+    {
+        @Html.HiddenFor(d => d.Id)
+    }
+    <div class="form-group">
+        <label>Name</label>
+        @Html.TextBoxFor(d => d.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.Name)
+    </div>
+
+    <div>
+        <input type="submit" value="@ViewBag.Action" class="btn btn-primary" />
+        <a href="/departments/index" class="btn btn-link"> Back to List</a>
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿@model List<Department>
+@{
+    ViewBag.Title = "Departments";
+}
+
+<h2>Departments</h2>
+
+@if (User.IsInRole("Admin"))
+{
+<a href="/departments/add" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add</span></a>
+@*glyphicon like fontawesome in bootstrap*@
+}
+@if (Model == null || Model.Count == 0)
+{
+    <h3> No Departments</h3>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Department dep in Model)
+            {
+                <tr id="@dep.Id">
+
+                    <td>@dep.Name</td>
+                    <td>
+                        @Html.Partial("_PartialControlersBtns", dep.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/confirmDelete")
+}

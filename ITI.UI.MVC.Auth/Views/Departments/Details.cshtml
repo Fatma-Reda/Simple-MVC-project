@@ -1,0 +1,23 @@
+﻿@model Department
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2> Department Details</h2>
+<a href="/departments/index" class="btn btn-link"> Back to List</a>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    Name
+                </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                @Model.Name
+            </div>
+        </div>
+    </div>
+</div>

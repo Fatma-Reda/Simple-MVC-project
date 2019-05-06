@@ -1,0 +1,18 @@
+﻿@model Employee
+
+<tr id="@Model.Id">
+
+    <td>@Model.Name</td>
+    <td>@Model.Age</td>
+    <td>@Model.Gender</td>
+    <td>@Model.Email</td>
+    <td>@Model.Department.Name</td>
+    <td>
+        @Html.Partial("_PartialControlersBtns", @Model.Id)
+    </td>
+
+</tr>
+
+@section scripts{
+    @Scripts.Render("~/bundles/confirmDelete")
+    }
